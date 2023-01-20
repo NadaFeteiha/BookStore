@@ -83,6 +83,7 @@ fun BookItem(
                 val clicked = remember { mutableStateOf(false) }
                 Text(
                     text = state.title,
+                    maxLines = 2,
                     modifier = Modifier.padding(8.dp),
                     style = typography.labelMedium
                 )
