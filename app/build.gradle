@@ -81,4 +81,6 @@ dependencies {
     implementation "com.google.accompanist:accompanist-systemuicontroller:$accompanist_version"
 
 
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.4'
+
 }

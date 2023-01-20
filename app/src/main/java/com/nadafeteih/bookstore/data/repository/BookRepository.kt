@@ -9,5 +9,5 @@ interface BookRepository {
 
     suspend fun searchBook(bookTitle: String): List<Book>
 
-    suspend fun getBookDetails(bookId: Int)
+    suspend fun getBookDetails(bookId: String): Book
 }

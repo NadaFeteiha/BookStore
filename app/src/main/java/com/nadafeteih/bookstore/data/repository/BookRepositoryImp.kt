@@ -20,7 +20,7 @@ class BookRepositoryImp @Inject constructor(private val remoteDataSource: Remote
         return remoteDataSource.searchBook(bookTitle).toEntity()
     }
 
-    override suspend fun getBookDetails(bookId: Int) {
-        TODO("Not yet implemented")
+    override suspend fun getBookDetails(bookId: String):Book {
+        return remoteDataSource.getBookDetails(bookId).toEntity()
     }
 }

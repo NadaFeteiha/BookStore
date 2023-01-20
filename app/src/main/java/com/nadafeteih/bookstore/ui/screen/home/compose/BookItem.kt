@@ -17,9 +17,9 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.unit.dp
-import coil.compose.rememberImagePainter
-import com.nadafeteih.bookstore.entity.Book
+import coil.compose.rememberAsyncImagePainter
 import com.nadafeteih.bookstore.viewModel.BookUIState
 import kotlin.math.abs
 import kotlin.math.min
@@ -28,13 +28,19 @@ import kotlin.math.min
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun BookItem(
-    movie: BookUIState,
+    state: BookUIState,
     isSelected: Boolean,
     offset: Float,
+    onClickBook: (BookUIState) -> Unit,
+    onClickSaved: (BookUIState) -> Unit
 ) {
+    val configuration = LocalConfiguration.current
+    val screenHeight = configuration.screenHeightDp
+    val screenWidth = configuration.screenWidthDp.dp
+
     val animateHeight = getOffsetBasedValue(
-        selectedValue = 645,
-        nonSelectedValue = 360,
+        selectedValue = (screenHeight / 4) * 3,
+        nonSelectedValue = (screenHeight / 2),
         isSelected = isSelected,
         offset = offset
     ).dp
@@ -51,22 +57,18 @@ fun BookItem(
         offset = offset
     ).dp
 
-    val posterFullPath = "${movie.cover}"
-
     Card(
-//        elevation = animateDpAsState(animateElevation).value,
+        elevation = CardDefaults.cardElevation(defaultElevation = animateDpAsState(animateElevation).value),
         modifier = Modifier
             .width(animateWidth)
             .height(animateHeight)
             .padding(24.dp),
         shape = RoundedCornerShape(16.dp),
-//        backgroundColor = MaterialTheme.colorScheme.onBackground,
-//        contentColor = MaterialTheme.colorScheme.background,
-//        onClick = { openMovieDetail.invoke() },
+        onClick = { onClickBook(state) },
     ) {
         Column {
             Image(
-                painter = rememberImagePainter(data = posterFullPath),
+                painter = rememberAsyncImagePainter(model = state.cover),
                 contentScale = ContentScale.Crop,
                 contentDescription = null,
                 modifier = Modifier
@@ -80,12 +82,12 @@ fun BookItem(
             ) {
                 val clicked = remember { mutableStateOf(false) }
                 Text(
-                    text = movie.title,
+                    text = state.title,
                     modifier = Modifier.padding(8.dp),
                     style = typography.labelMedium
                 )
                 IconButton(onClick = {
-//                    addToWatchList.invoke()
+                    onClickSaved(state)
                     clicked.value = !clicked.value
                 }) {
                     Icon(
@@ -100,30 +102,6 @@ fun BookItem(
                             )
                     )
                 }
-            }
-
-//            Text(
-//                text = "Release: ${movie.release_date}",
-//                modifier = Modifier.padding(horizontal = 8.dp, vertical = 4.dp),
-//                style = typography.h6.copy(fontSize = 12.sp)
-//            )
-//            Text(
-//                text = "PG13  •  ${movie.vote_average}/10",
-//                modifier = Modifier.padding(horizontal = 8.dp, vertical = 4.dp),
-//                style = typography.h6.copy(fontSize = 12.sp, fontWeight = FontWeight.Medium)
-//            )
-//            Text(
-//                text = movie.overview,
-//                maxLines = 1,
-//                overflow = TextOverflow.Ellipsis,
-//                modifier = Modifier
-//                    .align(Alignment.CenterHorizontally)
-//                    .padding(8.dp)
-//                    .weight(1f),
-//                style = typography.subtitle2
-//            )
-            Button(onClick = {}, modifier = Modifier.fillMaxWidth()) {
-                Text(text = "Get Tickets", modifier = Modifier.padding(8.dp))
             }
         }
     }

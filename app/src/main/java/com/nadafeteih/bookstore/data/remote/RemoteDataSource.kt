@@ -1,6 +1,7 @@
 package com.nadafeteih.bookstore.data.remote
 
 import com.nadafeteih.bookstore.data.remote.response.BookDTO
+import com.nadafeteih.bookstore.data.remote.response.BookDetailDTO
 
 interface RemoteDataSource {
 
@@ -8,5 +9,6 @@ interface RemoteDataSource {
 
     suspend fun searchBook(bookTitle: String): List<BookDTO>
 
-    suspend fun getBookDetails(bookId: Int)
+    suspend fun getBookDetails(bookId: String): BookDetailDTO
+
 }
