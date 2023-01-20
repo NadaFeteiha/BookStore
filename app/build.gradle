@@ -3,6 +3,7 @@ plugins {
     id 'org.jetbrains.kotlin.android'
     id "kotlin-kapt"
     id 'dagger.hilt.android.plugin'
+    id 'com.squareup.sqldelight'
 }
 
 android {
@@ -80,7 +81,16 @@ dependencies {
 
     implementation "com.google.accompanist:accompanist-systemuicontroller:$accompanist_version"
 
-
+    // coroutines
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.4'
 
+    // SQL Delight
+    implementation "com.squareup.sqldelight:android-driver:1.5.2"
+    implementation "com.squareup.sqldelight:coroutines-extensions-jvm:1.5.2"
+}
+
+sqldelight {
+    bookdb {
+        packageName = "com.nadafeteih.bookstore"
+    }
 }
