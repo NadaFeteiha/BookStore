@@ -1,11 +1,14 @@
 package com.nadafeteih.bookstore.ui.screen.home
 
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
+import androidx.compose.ui.graphics.Color
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
+import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import com.nadafeteih.bookstore.ui.composable.Pager
 import com.nadafeteih.bookstore.ui.composable.PagerState
 import com.nadafeteih.bookstore.ui.screen.home.compose.BookItem
@@ -20,6 +23,11 @@ fun HomeScreen(
     viewModel: HomeViewModel = hiltViewModel(),
 ) {
     val state by viewModel.uiState.collectAsState()
+
+    val systemUIController = rememberSystemUiController()
+    systemUIController.setStatusBarColor(color = MaterialTheme.colorScheme.background)
+    systemUIController.setNavigationBarColor(color = MaterialTheme.colorScheme.primary)
+
     HomeContent(
         state = state,
         onClickBook = {},

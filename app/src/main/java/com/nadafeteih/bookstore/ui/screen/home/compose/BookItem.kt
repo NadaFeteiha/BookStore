@@ -59,11 +59,11 @@ fun BookItem(
     Card(
         elevation = CardDefaults.cardElevation(defaultElevation = animateDpAsState(animateElevation).value),
         modifier = Modifier
+            .nonRippleEffect { onClickBook(state) }
             .width(animateWidth)
             .height(animateHeight)
             .padding(horizontal = 24.dp),
         shape = RoundedCornerShape(16.dp),
-        onClick = { onClickBook(state) },
     ) {
         Column(
             modifier = Modifier.fillMaxSize(),
