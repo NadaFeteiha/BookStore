@@ -1,32 +1,29 @@
 package com.nadafeteih.bookstore.ui.composable
 
+import com.nadafeteih.bookstore.R
+
 sealed class BottomBarScreen(
     val route: String,
     val title: String,
-//    val icon: Int,
-//    val icon_focused: Int
+    val icon: Int,
 ) {
 
-    object Home: BottomBarScreen(
+    object Home : BottomBarScreen(
         route = "Home",
         title = "Home",
-//        icon = R.drawable.ic_bottom_home,
-//        icon_focused = R.drawable.ic_bottom_home_focused
+        icon = R.drawable.home_icon,
     )
 
-    object Saved: BottomBarScreen(
+    object Saved : BottomBarScreen(
         route = "Saved",
         title = "Saved",
-//        icon = R.drawable.ic_bottom_report,
-//        icon_focused = R.drawable.ic_bottom_report_focused
+        icon = R.drawable.saved,
     )
 
-    // for report
-    object Search: BottomBarScreen(
+    object Search : BottomBarScreen(
         route = "Search",
         title = "Search",
-//        icon = R.drawable.ic_bottom_profile,
-//        icon_focused = R.drawable.ic_bottom_profile_focused
+        icon = R.drawable.search_icon,
     )
 
 }

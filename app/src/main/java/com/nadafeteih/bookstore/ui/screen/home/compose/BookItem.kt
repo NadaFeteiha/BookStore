@@ -1,13 +1,9 @@
 package com.nadafeteih.bookstore.ui.screen.home.compose
 
 import androidx.compose.animation.core.animateDpAsState
-import androidx.compose.animation.core.animateFloatAsState
-import androidx.compose.animation.core.tween
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Add
 import androidx.compose.material3.*
 import androidx.compose.material3.MaterialTheme.typography
 import androidx.compose.runtime.Composable
@@ -15,12 +11,15 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalConfiguration
+import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import coil.compose.rememberAsyncImagePainter
-import com.nadafeteih.bookstore.viewModel.BookUIState
+import com.nadafeteih.bookstore.R
+import com.nadafeteih.bookstore.ui.modifier.nonRippleEffect
+import com.nadafeteih.bookstore.viewModel.home.BookUIState
 import kotlin.math.abs
 import kotlin.math.min
 
@@ -62,11 +61,14 @@ fun BookItem(
         modifier = Modifier
             .width(animateWidth)
             .height(animateHeight)
-            .padding(24.dp),
+            .padding(horizontal = 24.dp),
         shape = RoundedCornerShape(16.dp),
         onClick = { onClickBook(state) },
     ) {
-        Column {
+        Column(
+            modifier = Modifier.fillMaxSize(),
+            horizontalAlignment = Alignment.CenterHorizontally
+        ) {
             Image(
                 painter = rememberAsyncImagePainter(model = state.cover),
                 contentScale = ContentScale.Crop,
@@ -75,34 +77,65 @@ fun BookItem(
                     .fillMaxWidth()
                     .height(360.dp)
             )
+
+            Text(
+                text = state.title,
+                maxLines = 2,
+                textAlign = TextAlign.Start,
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(8.dp),
+                style = typography.titleLarge
+            )
+
+            Text(
+                text = state.subTitle,
+                maxLines = 1,
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(8.dp),
+                style = typography.bodyMedium
+            )
+
             Row(
                 horizontalArrangement = Arrangement.SpaceBetween,
                 verticalAlignment = Alignment.CenterVertically,
-                modifier = Modifier.fillMaxWidth()
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(top = 16.dp)
+                    .padding(horizontal = 8.dp)
             ) {
                 val clicked = remember { mutableStateOf(false) }
-                Text(
-                    text = state.title,
-                    maxLines = 2,
-                    modifier = Modifier.padding(8.dp),
-                    style = typography.labelMedium
+
+                Text(text = "price ${state.price}")
+
+//                IconButton(
+//                    onClick = {
+//                        onClickSaved(state)
+//                        clicked.value = !clicked.value
+//                    }) {
+//                    Icon(
+//                        imageVector = R.drawable.save_icon,
+//                        tint = MaterialTheme.colorScheme.primary,
+//                        contentDescription = null,
+//                    )
+//                }
+
+                Icon(
+                    modifier = Modifier.nonRippleEffect {
+                        onClickSaved(state)
+                        clicked.value = !clicked.value
+                    },
+                    painter = painterResource(
+                        id = if (state.isSaved) {
+                            R.drawable.saved_icon
+                        } else {
+                            R.drawable.save_icon
+                        }
+                    ),
+                    tint = MaterialTheme.colorScheme.secondary,
+                    contentDescription = null
                 )
-                IconButton(onClick = {
-                    onClickSaved(state)
-                    clicked.value = !clicked.value
-                }) {
-                    Icon(
-                        imageVector = Icons.Default.Add,
-                        tint = MaterialTheme.colorScheme.primary,
-                        contentDescription = null,
-                        modifier = Modifier
-                            .graphicsLayer(
-                                rotationY = animateFloatAsState(
-                                    if (clicked.value) 720f else 0f, tween(400)
-                                ).value
-                            )
-                    )
-                }
             }
         }
     }

@@ -4,8 +4,9 @@ import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import com.nadafeteih.bookstore.ui.composable.BottomBarScreen
+import com.nadafeteih.bookstore.ui.screen.bookDetails.bookDetailsRoute
 import com.nadafeteih.bookstore.ui.screen.home.homeRoute
-import com.nadafeteih.bookstore.ui.screen.saved.savedRoute
+import com.nadafeteih.bookstore.ui.screen.savedBook.savedRoute
 import com.nadafeteih.bookstore.ui.screen.search.searchRoute
 
 
@@ -18,5 +19,6 @@ fun BookNavGraph(navController: NavHostController) {
         homeRoute(navController = navController)
         savedRoute(navController = navController)
         searchRoute(navController = navController)
+        bookDetailsRoute(navController = navController)
     }
 }

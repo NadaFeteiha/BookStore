@@ -14,3 +14,7 @@ insertBook:
 INSERT OR REPLACE
 INTO bookEntity
 VALUES(?,?,?);
+
+getAllBooks:
+SELECT *
+FROM bookEntity;

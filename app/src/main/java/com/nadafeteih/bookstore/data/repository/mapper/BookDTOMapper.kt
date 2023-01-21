@@ -11,5 +11,6 @@ internal fun BookDTO.toEntity(): Book {
         cover = image ?: "",
         price = price ?: "",
         title = title ?: "",
+        subtitle = subtitle ?: ""
     )
 }

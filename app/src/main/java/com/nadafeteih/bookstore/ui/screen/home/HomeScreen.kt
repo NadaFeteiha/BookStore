@@ -9,8 +9,8 @@ import androidx.navigation.NavHostController
 import com.nadafeteih.bookstore.ui.composable.Pager
 import com.nadafeteih.bookstore.ui.composable.PagerState
 import com.nadafeteih.bookstore.ui.screen.home.compose.BookItem
-import com.nadafeteih.bookstore.viewModel.BookUIState
-import com.nadafeteih.bookstore.viewModel.HomeUIState
+import com.nadafeteih.bookstore.viewModel.home.BookUIState
+import com.nadafeteih.bookstore.viewModel.home.BooksUIState
 import com.nadafeteih.bookstore.viewModel.home.HomeViewModel
 import java.lang.Math.abs
 
@@ -23,14 +23,13 @@ fun HomeScreen(
     HomeContent(
         state = state,
         onClickBook = {},
-        onClickSaved = {}
+        onClickSaved = viewModel::onClickSave
     )
 }
 
-
 @Composable
 fun HomeContent(
-    state: HomeUIState,
+    state: BooksUIState,
     onClickBook: (BookUIState) -> Unit,
     onClickSaved: (BookUIState) -> Unit
 ) {
@@ -46,8 +45,7 @@ fun HomeContent(
             } else 0f
 
             BookItem(
-                state = book,
-                isSelected,
+                state = book, isSelected,
                 filteredOffset,
                 onClickBook = onClickBook,
                 onClickSaved = onClickSaved
