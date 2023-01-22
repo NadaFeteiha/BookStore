@@ -5,7 +5,6 @@ import com.nadafeteih.bookstore.entity.Book
 import javax.inject.Inject
 
 class SaveBookUseCase @Inject constructor(private val repository: BookRepository) {
-
     suspend operator fun invoke(book: Book, isSaved: Boolean) {
         if (isSaved) {
             repository.deleteBook(book.id)
