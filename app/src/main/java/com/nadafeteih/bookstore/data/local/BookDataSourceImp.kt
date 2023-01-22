@@ -19,18 +19,19 @@ class BookDataSourceImp @Inject constructor(private val bookDataBase: bookdb) : 
 
     override fun getAllBooks(): Flow<List<BookEntity>> {
         return bookDataBase.bookEntityQueries.getAllBooks().asFlow().mapToList()
-
     }
 
     override suspend fun insertBook(book: BookEntity) {
         return bookDataBase.bookEntityQueries.insertBook(
             id = book.id,
             title = book.title,
-            cover = book.cover
+            cover = book.cover,
+            price = book.price,
+            subtitle = book.subtitle,
         )
     }
 
     override suspend fun deleteBook(id: String) {
-        TODO("Not yet implemented")
+        bookDataBase.bookEntityQueries.deleteBook(id)
     }
 }
