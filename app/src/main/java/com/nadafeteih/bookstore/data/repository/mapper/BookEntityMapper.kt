@@ -9,7 +9,9 @@ fun BookEntity.toEntity(): Book {
     return Book(
         id = id,
         title = title,
-        cover = cover
+        cover = cover,
+        subtitle = subtitle,
+        price = price
     )
 }
 
@@ -17,6 +19,8 @@ fun Book.toEntity(): BookEntity {
     return BookEntity(
         id = id,
         title = title,
-        cover = cover
+        cover = cover,
+        price = price,
+        subtitle = subtitle,
     )
 }

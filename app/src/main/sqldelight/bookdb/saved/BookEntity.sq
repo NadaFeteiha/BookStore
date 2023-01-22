@@ -1,7 +1,9 @@
 CREATE TABLE bookEntity (
     id TEXT NOT NULL PRIMARY KEY,
     title TEXT NOT NULL,
-    cover TEXT NOT NULL
+    cover TEXT NOT NULL,
+    price TEXT NOT NULL,
+    subtitle TEXT NOT NULL
 );
 
 getBookById:
@@ -13,8 +15,12 @@ WHERE id = :id;
 insertBook:
 INSERT OR REPLACE
 INTO bookEntity
-VALUES(?,?,?);
+VALUES(?,?,?,?,?);
 
 getAllBooks:
 SELECT *
 FROM bookEntity;
+
+deleteBook:
+DELETE FROM bookEntity
+WHERE id = :id;

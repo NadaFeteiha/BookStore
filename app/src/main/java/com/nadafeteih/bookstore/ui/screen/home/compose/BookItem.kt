@@ -109,18 +109,6 @@ fun BookItem(
 
                 Text(text = "price ${state.price}")
 
-//                IconButton(
-//                    onClick = {
-//                        onClickSaved(state)
-//                        clicked.value = !clicked.value
-//                    }) {
-//                    Icon(
-//                        imageVector = R.drawable.save_icon,
-//                        tint = MaterialTheme.colorScheme.primary,
-//                        contentDescription = null,
-//                    )
-//                }
-
                 Icon(
                     modifier = Modifier.nonRippleEffect {
                         onClickSaved(state)
