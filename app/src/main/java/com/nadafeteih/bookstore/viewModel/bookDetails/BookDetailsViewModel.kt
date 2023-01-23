@@ -1,5 +1,6 @@
 package com.nadafeteih.bookstore.viewModel.bookDetails
 
+import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.nadafeteih.bookstore.useCase.GetBookDetailsUseCase
@@ -10,16 +11,21 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import javax.inject.Inject
+
 @HiltViewModel
 class BookDetailsViewModel @Inject constructor(
     private val getBookDetails: GetBookDetailsUseCase,
-    private val saveBook: SaveBookUseCase
+    private val saveBook: SaveBookUseCase,
+    savedStateHandle: SavedStateHandle,
 ) : ViewModel() {
+
+    private val args = BookDetailsArgs(savedStateHandle)
 
     private val _uiState = MutableStateFlow(BookUIState())
     val uiState = _uiState.asStateFlow()
 
     init {
+        _uiState.update { it.copy(bookDetail = it.bookDetail.copy(id = args.bookId)) }
         getBookDetailsById()
     }
 

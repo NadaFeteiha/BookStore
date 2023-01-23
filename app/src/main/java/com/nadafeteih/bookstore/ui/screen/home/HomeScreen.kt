@@ -24,7 +24,7 @@ fun HomeScreen(
 
     val systemUIController = rememberSystemUiController()
     systemUIController.setStatusBarColor(color = MaterialTheme.colorScheme.background)
-    systemUIController.setNavigationBarColor(color = MaterialTheme.colorScheme.primary)
+    systemUIController.setNavigationBarColor(color = MaterialTheme.colorScheme.secondaryContainer)
     val clickedBook = remember { mutableStateOf(false) }
 
     HomeContent(
