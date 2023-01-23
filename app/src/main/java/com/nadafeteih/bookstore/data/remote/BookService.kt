@@ -14,7 +14,7 @@ interface BookService {
     @GET("new")
     suspend fun getNewBooks(): Response<BaseResponse>
 
-    @GET("books/{isbn}")
-    suspend fun getBookDetails(isbn: String):Response<BookDetailDTO>
+    @GET("books/{id}")
+    suspend fun getBookDetails(@Path("id") id: String):Response<BookDetailDTO>
 
 }
