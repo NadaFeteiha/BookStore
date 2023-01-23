@@ -6,11 +6,13 @@ import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
+import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import com.nadafeteih.bookstore.ui.screen.bookDetails.navigateToBookDetails
 import com.nadafeteih.bookstore.ui.screen.savedBook.compose.SavedBookItem
 import com.nadafeteih.bookstore.viewModel.home.BookUIState
@@ -25,6 +27,8 @@ fun SavedScreen(
 ) {
     val state by viewModel.uiState.collectAsState()
     val clickedBook = remember { mutableStateOf(false) }
+    val systemUIController = rememberSystemUiController()
+    systemUIController.setStatusBarColor(color = MaterialTheme.colorScheme.background)
 
     SavedContent(
         state = state,
