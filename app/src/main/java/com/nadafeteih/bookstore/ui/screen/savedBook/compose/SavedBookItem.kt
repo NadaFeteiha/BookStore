@@ -25,7 +25,8 @@ fun SavedBookItem(
     modifier: Modifier = Modifier,
     book: BookUIState,
     onClickBookDetails: (BookUIState) -> Unit,
-    onclickUnSave: (BookUIState) -> Unit
+    onclickUnSave: (BookUIState) -> Unit,
+    isSaveIconVisible: Boolean = true
 ) {
 
     Row(
@@ -60,11 +61,13 @@ fun SavedBookItem(
             ) {
                 Text(text = book.price)
 
-                Icon(
-                    modifier = Modifier.nonRippleEffect { onclickUnSave(book) },
-                    painter = painterResource(id = R.drawable.saved_icon),
-                    contentDescription = null
-                )
+                if (isSaveIconVisible) {
+                    Icon(
+                        modifier = Modifier.nonRippleEffect { onclickUnSave(book) },
+                        painter = painterResource(id = R.drawable.saved_icon),
+                        contentDescription = null
+                    )
+                }
             }
 
         }
