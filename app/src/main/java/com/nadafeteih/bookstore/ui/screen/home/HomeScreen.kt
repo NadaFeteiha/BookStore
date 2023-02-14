@@ -1,10 +1,11 @@
 package com.nadafeteih.bookstore.ui.screen.home
 
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Button
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Switch
 import androidx.compose.material3.Text
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
@@ -15,6 +16,7 @@ import androidx.navigation.NavHostController
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import com.nadafeteih.bookstore.ui.composable.Pager
 import com.nadafeteih.bookstore.ui.composable.PagerState
+import com.nadafeteih.bookstore.ui.main.AppThemeState
 import com.nadafeteih.bookstore.ui.screen.bookDetails.navigateToBookDetails
 import com.nadafeteih.bookstore.ui.screen.home.compose.BookItem
 import com.nadafeteih.bookstore.viewModel.home.BookUIState
@@ -25,6 +27,7 @@ import java.lang.Math.abs
 @Composable
 fun HomeScreen(
     navController: NavHostController,
+    appTheme: MutableState<Boolean>,
     viewModel: HomeViewModel = hiltViewModel(),
 ) {
     val state by viewModel.uiState.collectAsState()
@@ -36,6 +39,7 @@ fun HomeScreen(
 
     HomeContent(
         state = state,
+        appTheme = appTheme,
         onClickBook = {
             if (!clickedBook.value) {
                 navController.navigateToBookDetails(it.id)
@@ -49,17 +53,24 @@ fun HomeScreen(
 @Composable
 fun HomeContent(
     state: BooksUIState,
+    appTheme: MutableState<Boolean>,
     onClickBook: (BookUIState) -> Unit,
     onClickSaved: (BookUIState) -> Unit
 ) {
 
     Column {
 
-        Text(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(vertical = 16.dp, horizontal = 24.dp), text = "Home ..."
-        )
+        Row(modifier = Modifier.padding(vertical = 16.dp, horizontal = 24.dp)) {
+            Text(text = "Home ...")
+            val checkedState = remember { mutableStateOf(appTheme.value) }
+            Switch(
+                checked = checkedState.value,
+                onCheckedChange = {
+                    checkedState.value = it
+                    appTheme.value = it
+                }
+            )
+        }
 
         if (state.books.isNotEmpty()) {
             val pagerState = remember { PagerState(maxPage = state.books.size - 1) }
@@ -67,9 +78,10 @@ fun HomeContent(
             Pager(state = pagerState) {
                 val book = state.books[commingPage]
                 val isSelected = pagerState.currentPage == commingPage
-                val filteredOffset = if (abs(pagerState.currentPage - commingPage) < 2) {
-                    currentPageOffset
-                } else 0f
+                val filteredOffset =
+                    if (kotlin.math.abs(pagerState.currentPage - commingPage) < 2) {
+                        currentPageOffset
+                    } else 0f
 
                 BookItem(
                     state = book, isSelected,

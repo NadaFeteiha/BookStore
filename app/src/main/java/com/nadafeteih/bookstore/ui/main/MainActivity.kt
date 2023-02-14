@@ -1,4 +1,4 @@
-package com.nadafeteih.bookstore.ui
+package com.nadafeteih.bookstore.ui.main
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
@@ -8,10 +8,8 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
-import androidx.core.view.WindowCompat
 import androidx.navigation.compose.rememberNavController
-import com.google.accompanist.systemuicontroller.rememberSystemUiController
+import com.nadafeteih.bookstore.ui.BookNavGraph
 import com.nadafeteih.bookstore.ui.composable.BottomBar
 import com.nadafeteih.bookstore.ui.theme.BookStoreTheme
 import dagger.hilt.android.AndroidEntryPoint
@@ -23,7 +21,10 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
 
         setContent {
-            BookStoreTheme {
+            val isDarkTheme = remember { mutableStateOf(false) }
+            BookStoreTheme(
+                darkTheme = isDarkTheme.value
+            ) {
                 val navController = rememberNavController()
                 Scaffold(
                     bottomBar = {
@@ -31,7 +32,7 @@ class MainActivity : ComponentActivity() {
                     }
                 ) { innerPadding ->
                     Box(modifier = Modifier.padding(innerPadding)) {
-                        BookNavGraph(navController = navController)
+                        BookNavGraph(navController = navController, isDarkTheme)
                     }
                 }
             }
