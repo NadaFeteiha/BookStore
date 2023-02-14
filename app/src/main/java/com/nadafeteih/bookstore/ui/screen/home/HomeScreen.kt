@@ -3,6 +3,7 @@ package com.nadafeteih.bookstore.ui.screen.home
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.Button
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.*
@@ -53,7 +54,13 @@ fun HomeContent(
 ) {
 
     Column {
-        Text(modifier = Modifier.fillMaxWidth().padding(vertical = 16.dp, horizontal = 24.dp),text = "Home ...")
+
+        Text(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(vertical = 16.dp, horizontal = 24.dp), text = "Home ..."
+        )
+
         if (state.books.isNotEmpty()) {
             val pagerState = remember { PagerState(maxPage = state.books.size - 1) }
 

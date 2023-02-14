@@ -21,6 +21,7 @@ class HomeViewModel @Inject constructor(
     val uiState = _uiState.asStateFlow()
 
     init {
+
         getBooks()
     }
 
@@ -44,7 +45,13 @@ class HomeViewModel @Inject constructor(
             saveBook(book.toEntity(), book.isSaved)
             _uiState.update {
                 it.copy(books = _uiState.value.books
-                        .map {if (it.id == book.id) { it.copy(isSaved = !book.isSaved) } else { it } }
+                    .map {
+                        if (it.id == book.id) {
+                            it.copy(isSaved = !book.isSaved)
+                        } else {
+                            it
+                        }
+                    }
                 )
             }
         }
