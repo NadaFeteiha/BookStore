@@ -33,7 +33,7 @@ fun SearchScreen(
     SearchContent(
         state = state,
         query = query,
-        books = books,
+        books = books ,
         onQueryChange = viewModel::onQueryChange,
         onClickBookDetails = {
             if (!clickedBook.value) {
