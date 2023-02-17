@@ -2,6 +2,7 @@ package com.nadafeteih.bookstore.entity
 
 data class Book(
     val id: String,
+    val saved: Boolean = false,
     val cover: String = "",
     val price: String = "",
     val title: String = "",

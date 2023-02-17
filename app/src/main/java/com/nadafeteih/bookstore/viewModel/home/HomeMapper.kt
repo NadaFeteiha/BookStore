@@ -12,7 +12,7 @@ fun Book.toUIState(): BookUIState {
         title = title,
         subTitle = subtitle,
         price = price,
-        isSaved = false
+        isSaved = saved
     )
 }
 

@@ -4,7 +4,6 @@ import com.nadafeteih.bookstore.entity.Book
 
 data class BookUIState(
     val bookDetail: BookDetailsUIState = BookDetailsUIState(),
-    val isSaved: Boolean = false,
     val isLoading: Boolean = false,
     val error: Int = -1,
 )
@@ -37,6 +36,7 @@ fun Book.toUIState(): BookDetailsUIState {
         year = year,
         rating = rating,
         subtitle = subtitle,
+        isSaved = saved
     )
 }
 

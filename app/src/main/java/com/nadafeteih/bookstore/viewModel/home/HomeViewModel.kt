@@ -21,7 +21,9 @@ class HomeViewModel @Inject constructor(
     val uiState = _uiState.asStateFlow()
 
     init {
-
+        viewModelScope.launch {
+            getNewBooks.getSavedBook()
+        }
         getBooks()
     }
 
@@ -31,7 +33,6 @@ class HomeViewModel @Inject constructor(
             try {
                 val books = getNewBooks()
                 _uiState.update { it.copy(isLoading = false, books = books.toUIState()) }
-
             } catch (throwable: Throwable) {
                 _uiState.update { it.copy(error = 1, isLoading = false) }
             }

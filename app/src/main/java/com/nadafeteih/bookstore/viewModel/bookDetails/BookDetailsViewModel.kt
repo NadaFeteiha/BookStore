@@ -44,7 +44,7 @@ class BookDetailsViewModel @Inject constructor(
     fun onClickSave(book: BookDetailsUIState) {
         viewModelScope.launch {
             saveBook(book = book.toEntity(), book.isSaved)
-            _uiState.update { it.copy(bookDetail = book.copy(isSaved = !it.isSaved)) }
+            _uiState.update { it.copy(bookDetail = book.copy(isSaved = !it.bookDetail.isSaved)) }
         }
     }
 

@@ -112,7 +112,13 @@ fun BookDetailsContent(
 
                 Icon(
                     modifier = Modifier.nonRippleEffect { onClickSaved(state.bookDetail) },
-                    painter = painterResource(id = R.drawable.saved_icon),
+                    painter = painterResource(
+                        id = if (state.bookDetail.isSaved) {
+                            R.drawable.saved_icon
+                        } else {
+                            R.drawable.save_icon
+                        }
+                    ),
                     contentDescription = null
                 )
             }
