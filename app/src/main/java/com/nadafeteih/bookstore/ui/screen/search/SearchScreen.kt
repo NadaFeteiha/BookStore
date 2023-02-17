@@ -25,10 +25,15 @@ fun SearchScreen(
     val systemUIController = rememberSystemUiController()
     systemUIController.setStatusBarColor(color = MaterialTheme.colorScheme.background)
     val state by viewModel.uiState.collectAsState()
+    val query by viewModel.query.collectAsState()
+    val books by viewModel.books.collectAsState()
+
     val clickedBook = remember { mutableStateOf(false) }
 
     SearchContent(
         state = state,
+        query = query,
+        books = books,
         onQueryChange = viewModel::onQueryChange,
         onClickBookDetails = {
             if (!clickedBook.value) {
@@ -44,6 +49,8 @@ fun SearchScreen(
 @Composable
 fun SearchContent(
     state: SearchUIState,
+    query: String,
+    books: List<BookUIState>,
     onQueryChange: (String) -> Unit,
     onClickBookDetails: (BookUIState) -> Unit
 ) {
@@ -51,13 +58,13 @@ fun SearchContent(
     LazyColumn(modifier = Modifier.fillMaxSize()) {
         stickyHeader {
             SearchBar(
-                query = state.query,
+                query = query,
                 onQueryChange = onQueryChange,
                 searching = state.isLoading,
             )
         }
 
-        items(state.books, key = { it.id }) { book ->
+        items(books, key = { it.id }) { book ->
             SavedBookItem(
                 modifier = Modifier.animateItemPlacement(),
                 book = book,

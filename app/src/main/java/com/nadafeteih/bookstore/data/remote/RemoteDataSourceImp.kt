@@ -14,7 +14,7 @@ class RemoteDataSourceImp @Inject constructor(private val bookService: BookServi
     }
 
     override suspend fun searchBook(bookTitle: String): List<BookDTO> {
-        return wrap { bookService.getNewBooks() }.books
+        return wrap { bookService.searchBook(bookTitle) }.books
     }
 
     override suspend fun getBookDetails(bookId: String): BookDetailDTO {
