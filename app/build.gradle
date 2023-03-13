@@ -92,6 +92,10 @@ dependencies {
     implementation "ch.qos.logback:logback-classic:1.2.3"
     implementation "org.jetbrains.kotlinx:kotlinx-serialization-json:1.4.1"
 
+    //pager
+    implementation "com.google.accompanist:accompanist-pager:0.28.0"
+    implementation "androidx.compose.ui:ui-util:$compose_version"
+
 }
 
 sqldelight {
@@ -99,8 +103,3 @@ sqldelight {
         packageName = "com.nadafeteih.bookstore"
     }
 }
-
-//// Allow references to generated code
-//kapt {
-//    correctErrorTypes = true
-//}
