@@ -16,10 +16,17 @@
 - [Coroutines](https://developer.android.com/kotlin/coroutines) for asynchronous programming
 - [StateFlow](https://developer.android.com/kotlin/flow/stateflow-and-sharedflow) for reactive programming
 
-## Features
+## Features:
 The application allows users to:
 - Browse books
 - See ratings for each book
 - See the price of each book
 - Save books to favorites
 - Search for books
+- Dark, Light theme
+  
+## To Do:
+- Integrate Ktor to fetch remote data.
+- Refactor the app to follow the Google recommended architecture.
+- Improve the UI using Compose and Material Design guidelines.
+- Write unit and integration tests to ensure app functionality and stability.
