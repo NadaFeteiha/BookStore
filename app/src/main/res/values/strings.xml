@@ -2,4 +2,5 @@
     <string name="app_name">BookStore</string>
     <string name="search">Search</string>
     <string name="saved_book">Saved Books</string>
+    <string name="home">Home</string>
 </resources>

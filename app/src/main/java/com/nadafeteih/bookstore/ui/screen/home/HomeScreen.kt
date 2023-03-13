@@ -1,28 +1,20 @@
 package com.nadafeteih.bookstore.ui.screen.home
 
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.Button
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Switch
-import androidx.compose.material3.Text
-import androidx.compose.runtime.*
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
+import com.nadafeteih.bookstore.R
 import com.nadafeteih.bookstore.ui.composable.Pager
 import com.nadafeteih.bookstore.ui.composable.PagerState
-import com.nadafeteih.bookstore.ui.main.AppThemeState
 import com.nadafeteih.bookstore.ui.screen.bookDetails.navigateToBookDetails
 import com.nadafeteih.bookstore.ui.screen.home.compose.BookItem
+import com.nadafeteih.bookstore.ui.screen.home.compose.AppBar
 import com.nadafeteih.bookstore.viewModel.home.BookUIState
 import com.nadafeteih.bookstore.viewModel.home.BooksUIState
 import com.nadafeteih.bookstore.viewModel.home.HomeViewModel
-import java.lang.Math.abs
+import androidx.compose.runtime.*
 
 @Composable
 fun HomeScreen(
@@ -59,19 +51,10 @@ fun HomeContent(
 ) {
 
     Column {
-
-        Row(modifier = Modifier.padding(vertical = 16.dp, horizontal = 24.dp)) {
-            Text(text = "Home ...")
-            val checkedState = remember { mutableStateOf(appTheme.value) }
-            Switch(
-                checked = checkedState.value,
-                onCheckedChange = {
-                    checkedState.value = it
-                    appTheme.value = it
-                }
-            )
-        }
-
+        AppBar(
+            appTheme = appTheme,
+            title = R.string.home
+        )
         if (state.books.isNotEmpty()) {
             val pagerState = remember { PagerState(maxPage = state.books.size - 1) }
 

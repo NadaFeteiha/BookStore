@@ -2,6 +2,7 @@ package com.nadafeteih.bookstore.ui.screen.savedBook
 
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.lazy.LazyColumn
@@ -17,6 +18,7 @@ import androidx.navigation.NavHostController
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import com.nadafeteih.bookstore.R
 import com.nadafeteih.bookstore.ui.screen.bookDetails.navigateToBookDetails
+import com.nadafeteih.bookstore.ui.screen.home.compose.AppBar
 import com.nadafeteih.bookstore.ui.screen.savedBook.compose.SavedBookItem
 import com.nadafeteih.bookstore.viewModel.home.BookUIState
 import com.nadafeteih.bookstore.viewModel.home.BooksUIState
@@ -53,23 +55,25 @@ fun SavedContent(
     onClickSave: (BookUIState) -> Unit,
     onClickBookDetails: (BookUIState) -> Unit
 ) {
-    LazyColumn(
-        modifier = Modifier.fillMaxSize(),
-        contentPadding = PaddingValues(16.dp),
-        verticalArrangement = Arrangement.spacedBy(16.dp),
+    Column(
+        modifier = Modifier.fillMaxSize()
     ) {
+        AppBar(title = R.string.saved_book)
 
-        stickyHeader {
-            Text(text = stringResource(id = R.string.saved_book))
-        }
+        LazyColumn(
+            modifier = Modifier.fillMaxSize(),
+            contentPadding = PaddingValues(16.dp),
+            verticalArrangement = Arrangement.spacedBy(16.dp)
+        ) {
 
-        items(state.books, key = { it.id }) { book ->
-            SavedBookItem(
-                modifier = Modifier.animateItemPlacement(),
-                book = book,
-                onclickUnSave = onClickSave,
-                onClickBookDetails = onClickBookDetails
-            )
+            items(state.books, key = { it.id }) { book ->
+                SavedBookItem(
+                    modifier = Modifier.animateItemPlacement(),
+                    book = book,
+                    onclickUnSave = onClickSave,
+                    onClickBookDetails = onClickBookDetails
+                )
+            }
         }
     }
 }
