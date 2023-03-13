@@ -5,7 +5,6 @@ import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.composable
 import com.nadafeteih.bookstore.ui.composable.BottomBarScreen
-import com.nadafeteih.bookstore.ui.main.AppThemeState
 
 
 fun NavGraphBuilder.homeRoute(

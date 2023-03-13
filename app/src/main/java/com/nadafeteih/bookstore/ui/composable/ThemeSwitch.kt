@@ -1,4 +1,4 @@
-package com.nadafeteih.bookstore.ui.screen.home.compose
+package com.nadafeteih.bookstore.ui.composable
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable

@@ -56,7 +56,7 @@ fun SavedContent(
     Column(
         modifier = Modifier.fillMaxSize()
     ) {
-        AppBar(title = R.string.saved_book)
+        AppBar(title = R.string.saved_book, isHome = false)
 
         LazyColumn(
             modifier = Modifier.fillMaxSize(),

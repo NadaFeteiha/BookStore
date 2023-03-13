@@ -23,10 +23,6 @@ fun HomeScreen(
     viewModel: HomeViewModel = hiltViewModel(),
 ) {
     val state by viewModel.uiState.collectAsState()
-
-    val systemUIController = rememberSystemUiController()
-    systemUIController.setStatusBarColor(color = MaterialTheme.colorScheme.background)
-    systemUIController.setNavigationBarColor(color = MaterialTheme.colorScheme.secondaryContainer)
     val clickedBook = remember { mutableStateOf(false) }
 
     HomeContent(

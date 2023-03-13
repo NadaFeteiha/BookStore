@@ -2,6 +2,7 @@ package com.nadafeteih.bookstore.ui.screen.home.compose
 
 import androidx.compose.animation.core.animateDpAsState
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.*
@@ -35,7 +36,6 @@ fun BookItem(
 ) {
     val configuration = LocalConfiguration.current
     val screenHeight = configuration.screenHeightDp
-    val screenWidth = configuration.screenWidthDp.dp
 
     val animateHeight = getOffsetBasedValue(
         selectedValue = (screenHeight / 4) * 3,
@@ -44,16 +44,10 @@ fun BookItem(
         offset = offset
     ).dp
     val animateWidth = getOffsetBasedValue(
-        selectedValue = 340,
-        nonSelectedValue = 320,
-        isSelected = isSelected,
-        offset = offset
+        selectedValue = 340, nonSelectedValue = 320, isSelected = isSelected, offset = offset
     ).dp
     val animateElevation = getOffsetBasedValue(
-        selectedValue = 12,
-        nonSelectedValue = 2,
-        isSelected = isSelected,
-        offset = offset
+        selectedValue = 12, nonSelectedValue = 2, isSelected = isSelected, offset = offset
     ).dp
 
     Card(
@@ -64,10 +58,10 @@ fun BookItem(
             .height(animateHeight)
             .padding(horizontal = 24.dp),
         shape = RoundedCornerShape(16.dp),
+        colors = CardDefaults.cardColors(MaterialTheme.colorScheme.secondary)
     ) {
         Column(
-            modifier = Modifier.fillMaxSize(),
-            horizontalAlignment = Alignment.CenterHorizontally
+            modifier = Modifier.fillMaxSize(), horizontalAlignment = Alignment.CenterHorizontally
         ) {
             Image(
                 painter = rememberAsyncImagePainter(model = state.cover),
@@ -85,6 +79,7 @@ fun BookItem(
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(8.dp),
+                color = MaterialTheme.colorScheme.primary,
                 style = typography.titleLarge
             )
 
@@ -94,7 +89,8 @@ fun BookItem(
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(8.dp),
-                style = typography.bodyMedium
+                style = typography.bodyMedium,
+                color = MaterialTheme.colorScheme.primary
             )
 
             Row(
@@ -113,16 +109,13 @@ fun BookItem(
                     modifier = Modifier.nonRippleEffect {
                         onClickSaved(state)
                         clicked.value = !clicked.value
-                    },
-                    painter = painterResource(
+                    }, painter = painterResource(
                         id = if (state.isSaved) {
                             R.drawable.saved_icon
                         } else {
                             R.drawable.save_icon
                         }
-                    ),
-                    tint = MaterialTheme.colorScheme.secondary,
-                    contentDescription = null
+                    ), tint = MaterialTheme.colorScheme.secondary, contentDescription = null
                 )
             }
         }

@@ -9,6 +9,7 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.navigation.compose.rememberNavController
+import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import com.nadafeteih.bookstore.ui.BookNavGraph
 import com.nadafeteih.bookstore.ui.composable.BottomBar
 import com.nadafeteih.bookstore.ui.theme.BookStoreTheme
@@ -22,9 +23,11 @@ class MainActivity : ComponentActivity() {
 
         setContent {
             val isDarkTheme = remember { mutableStateOf(false) }
-            BookStoreTheme(
-                darkTheme = isDarkTheme.value
-            ) {
+            BookStoreTheme(darkTheme = isDarkTheme.value) {
+                val systemUIController = rememberSystemUiController()
+                systemUIController.setNavigationBarColor(color = MaterialTheme.colorScheme.background)
+                systemUIController.setStatusBarColor(color = MaterialTheme.colorScheme.background)
+
                 val navController = rememberNavController()
                 Scaffold(
                     bottomBar = {

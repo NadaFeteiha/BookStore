@@ -14,7 +14,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
-import com.nadafeteih.bookstore.ui.screen.home.compose.ThemeSwitch
+import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import com.nadafeteih.bookstore.ui.theme.Typography
 
 @Composable
@@ -44,6 +44,10 @@ fun AppBar(
                     appTheme.value = checkedState.value
                 }
             )
+
+            val systemUIController = rememberSystemUiController()
+            systemUIController.setStatusBarColor(color = MaterialTheme.colorScheme.background)
+            systemUIController.setNavigationBarColor(color = MaterialTheme.colorScheme.background)
         }
     }
 }

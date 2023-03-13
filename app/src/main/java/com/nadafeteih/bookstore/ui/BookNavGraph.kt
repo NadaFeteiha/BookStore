@@ -5,7 +5,6 @@ import androidx.compose.runtime.MutableState
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import com.nadafeteih.bookstore.ui.composable.BottomBarScreen
-import com.nadafeteih.bookstore.ui.main.AppThemeState
 import com.nadafeteih.bookstore.ui.screen.bookDetails.bookDetailsRoute
 import com.nadafeteih.bookstore.ui.screen.home.homeRoute
 import com.nadafeteih.bookstore.ui.screen.savedBook.savedRoute
