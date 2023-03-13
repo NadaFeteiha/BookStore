@@ -15,6 +15,7 @@
 - [MVVM](https://en.wikipedia.org/wiki/Model%E2%80%93view%E2%80%93viewmodel) architecture for clean separation of concerns and easy testing.
 - [Coroutines](https://developer.android.com/kotlin/coroutines) for asynchronous programming
 - [StateFlow](https://developer.android.com/kotlin/flow/stateflow-and-sharedflow) for reactive programming
+- [Pager in Compose](https://developer.android.com/jetpack/compose/layouts/pager)
 
 ## Features:
 The application allows users to:
@@ -24,6 +25,11 @@ The application allows users to:
 - Save books to favorites
 - Search for books
 - Dark, Light theme
+
+## Resources:
+- [Compose Pathway](https://developer.android.com/courses/jetpack-compose/course)
+- [Jetpack compose Samples](https://github.com/android/compose-samples)
+- [ComposeCookBook](https://github.com/Gurupreet/ComposeCookBook)
   
 ## To Do:
 - Integrate Ktor to fetch remote data.
