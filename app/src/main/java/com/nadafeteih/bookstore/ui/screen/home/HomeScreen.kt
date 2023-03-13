@@ -10,7 +10,7 @@ import com.nadafeteih.bookstore.ui.composable.Pager
 import com.nadafeteih.bookstore.ui.composable.PagerState
 import com.nadafeteih.bookstore.ui.screen.bookDetails.navigateToBookDetails
 import com.nadafeteih.bookstore.ui.screen.home.compose.BookItem
-import com.nadafeteih.bookstore.ui.screen.home.compose.AppBar
+import com.nadafeteih.bookstore.ui.composable.AppBar
 import com.nadafeteih.bookstore.viewModel.home.BookUIState
 import com.nadafeteih.bookstore.viewModel.home.BooksUIState
 import com.nadafeteih.bookstore.viewModel.home.HomeViewModel
