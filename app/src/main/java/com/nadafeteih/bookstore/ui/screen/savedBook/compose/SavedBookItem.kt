@@ -65,7 +65,8 @@ fun SavedBookItem(
                     Icon(
                         modifier = Modifier.nonRippleEffect { onclickUnSave(book) },
                         painter = painterResource(id = R.drawable.saved_icon),
-                        contentDescription = null
+                        contentDescription = null,
+                        tint = MaterialTheme.colorScheme.tertiary,
                     )
                 }
             }

@@ -4,4 +4,6 @@
     <string name="saved_book">Saved Books</string>
     <string name="home">Home</string>
     <string name="empty_saved">Looks like you haven\'t saved any books yet!</string>
+    <string name="price">Price: %1$s</string>
+
 </resources>

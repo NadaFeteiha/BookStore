@@ -15,6 +15,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import coil.compose.rememberAsyncImagePainter
@@ -102,7 +104,12 @@ fun BookItem(
             ) {
                 val clicked = remember { mutableStateOf(false) }
 
-                Text(text = "price ${state.price}")
+                Text(
+                    text = stringResource(R.string.price, state.price),
+                    fontWeight = FontWeight.Bold,
+                    style = typography.bodyLarge,
+                    color = MaterialTheme.colorScheme.primary
+                )
 
                 Icon(
                     modifier = Modifier.nonRippleEffect {
@@ -114,7 +121,9 @@ fun BookItem(
                         } else {
                             R.drawable.save_icon
                         }
-                    ), tint = MaterialTheme.colorScheme.secondary, contentDescription = null
+                    ),
+                    tint = MaterialTheme.colorScheme.tertiary,
+                    contentDescription = null
                 )
             }
         }
