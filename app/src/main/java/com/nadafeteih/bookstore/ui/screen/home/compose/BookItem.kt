@@ -24,7 +24,6 @@ import com.nadafeteih.bookstore.viewModel.home.BookUIState
 import kotlin.math.abs
 import kotlin.math.min
 
-
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun BookItem(
@@ -58,7 +57,7 @@ fun BookItem(
             .height(animateHeight)
             .padding(horizontal = 24.dp),
         shape = RoundedCornerShape(16.dp),
-        colors = CardDefaults.cardColors(MaterialTheme.colorScheme.secondary)
+        colors = CardDefaults.cardColors(MaterialTheme.colorScheme.surface)
     ) {
         Column(
             modifier = Modifier.fillMaxSize(), horizontalAlignment = Alignment.CenterHorizontally

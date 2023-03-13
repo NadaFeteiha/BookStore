@@ -45,7 +45,7 @@ fun BookDetailsScreen(
     viewModel: BookDetailsViewModel = hiltViewModel(),
 ) {
     val systemUIController = rememberSystemUiController()
-    systemUIController.setStatusBarColor(color = MaterialTheme.colorScheme.secondaryContainer)
+    systemUIController.setStatusBarColor(color = MaterialTheme.colorScheme.surface)
 
     val state by viewModel.uiState.collectAsState()
     BookDetailsContent(
@@ -67,13 +67,11 @@ fun BookDetailsContent(
         verticalArrangement = Arrangement.SpaceBetween,
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
-
-
         Column(
             modifier = Modifier
                 .fillMaxWidth()
                 .background(
-                    MaterialTheme.colorScheme.secondaryContainer,
+                    MaterialTheme.colorScheme.surface,
                     shape = RoundedCornerShape(0.dp, 0.dp, 24.dp, 24.dp)
                 )
         ) {
@@ -139,7 +137,7 @@ fun BookDetailsContent(
                     append("Authors: ")
                 }
                 withStyle(
-                    style = SpanStyle(color = Color.Black),
+                    style = SpanStyle(color = MaterialTheme.colorScheme.primary),
                 ) {
                     append(state.bookDetail.authors)
                 }

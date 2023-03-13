@@ -1,10 +1,8 @@
 package com.nadafeteih.bookstore.ui.screen.home
 
 import androidx.compose.foundation.layout.Column
-import androidx.compose.material3.MaterialTheme
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
-import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import com.nadafeteih.bookstore.R
 import com.nadafeteih.bookstore.ui.composable.Pager
 import com.nadafeteih.bookstore.ui.composable.PagerState
@@ -55,10 +53,10 @@ fun HomeContent(
             val pagerState = remember { PagerState(maxPage = state.books.size - 1) }
 
             Pager(state = pagerState) {
-                val book = state.books[commingPage]
-                val isSelected = pagerState.currentPage == commingPage
+                val book = state.books[comingPage]
+                val isSelected = pagerState.currentPage == comingPage
                 val filteredOffset =
-                    if (kotlin.math.abs(pagerState.currentPage - commingPage) < 2) {
+                    if (kotlin.math.abs(pagerState.currentPage - comingPage) < 2) {
                         currentPageOffset
                     } else 0f
 

@@ -124,31 +124,11 @@ private fun CoroutineScope.calculateNewPosition(
     }
 }
 
-
-/**
- * Scope for [Pager] content.
- */
 class PagerScope(
     private val state: PagerState,
-    val commingPage: Int
+    val comingPage: Int
 ) {
-    /**
-     * Returns the current selected page
-     */
-    val currentPage: Int
-        get() = state.currentPage
-
-    /**
-     * Returns the current selected page offset
-     */
-    val currentPageOffset: Float
-        get() = state.currentPageOffset
-
-    /**
-     * Returns the current selection state
-     */
-    val selectionState: SelectionState
-        get() = state.selectionState
+    val currentPageOffset: Float get() = state.currentPageOffset
 }
 
 class PagerState(
@@ -181,13 +161,6 @@ class PagerState(
 
     var selectionState by mutableStateOf(SelectionState.Selected)
 
-    suspend inline fun <R> selectPage(block: PagerState.() -> R): R = try {
-        selectionState = SelectionState.Undecided
-        block()
-    } finally {
-        selectPage()
-    }
-
     suspend fun selectPage() {
         currentPage -= currentPageOffset.roundToInt()
         snapToOffset(0f)
@@ -215,9 +188,6 @@ class PagerState(
         selectPage()
     }
 
-    override fun toString(): String =
-        "PagerState{minPage=$minPage, maxPage=$maxPage, " +
-                "currentPage=$currentPage, currentPageOffset=$currentPageOffset}"
 }
 
 enum class SelectionState {
