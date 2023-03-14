@@ -7,6 +7,15 @@ import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
+import io.ktor.client.*
+import io.ktor.client.engine.android.*
+import io.ktor.client.features.*
+import io.ktor.client.features.json.*
+import io.ktor.client.features.json.serializer.*
+import io.ktor.client.features.logging.*
+import io.ktor.client.request.*
+import io.ktor.http.*
+import okhttp3.OkHttp
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
@@ -16,6 +25,30 @@ import javax.inject.Singleton
 @InstallIn(SingletonComponent::class)
 object NetworkModule {
 
+    @Provides
+    fun provideHttpClient(): HttpClient {
+        return HttpClient(Android) {
+            install(Logging) {
+                level = LogLevel.ALL
+            }
+            install(JsonFeature) {
+                serializer = KotlinxSerializer()
+            }
+            install(HttpTimeout) {
+                requestTimeoutMillis = 15000L
+                connectTimeoutMillis = 15000L
+                socketTimeoutMillis = 15000L
+            }
+            // Apply to all requests
+            defaultRequest {
+                // Parameter("api_key", "some_api_key")
+                // Content Type
+                if (method != HttpMethod.Get) contentType(ContentType.Application.Json)
+                accept(ContentType.Application.Json)
+            }
+        }
+    }
+
     @Singleton
     @Provides
     fun provideBookService(retrofit: Retrofit): BookService {
@@ -24,7 +57,10 @@ object NetworkModule {
 
     @Singleton
     @Provides
-    fun provideRetrofitBookService(client: OkHttpClient,gsonConverterFactory: GsonConverterFactory): Retrofit {
+    fun provideRetrofitBookService(
+        client: OkHttpClient,
+        gsonConverterFactory: GsonConverterFactory
+    ): Retrofit {
         return Retrofit.Builder()
             .baseUrl(BuildConfig.BASE_URL)
             .client(client)

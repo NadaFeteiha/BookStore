@@ -1,32 +1,43 @@
 package com.nadafeteih.bookstore.data.remote
 
+import com.nadafeteih.bookstore.BuildConfig
+import com.nadafeteih.bookstore.data.remote.response.BaseResponse
 import com.nadafeteih.bookstore.data.remote.response.BookDTO
 import com.nadafeteih.bookstore.data.remote.response.BookDetailDTO
-import com.nadafeteih.bookstore.entity.Book
-import retrofit2.Response
+import com.nadafeteih.bookstore.data.remote.response.SearchResponse
+import io.ktor.client.features.*
 import javax.inject.Inject
+import io.ktor.client.HttpClient
+import io.ktor.client.request.get
+import io.ktor.client.request.url
 
-class RemoteDataSourceImp @Inject constructor(private val bookService: BookService) :
+class RemoteDataSourceImp @Inject constructor(private val client: HttpClient) :
     RemoteDataSource {
 
     override suspend fun getNewBooks(): List<BookDTO> {
-        return wrap { bookService.getNewBooks() }.books
+        return tryToCall<BaseResponse> { client.get { url(BuildConfig.BASE_URL + "new") } }.books
+
     }
 
     override suspend fun searchBook(bookTitle: String): List<BookDTO> {
-        return wrap { bookService.searchBook(bookTitle) }.books
+        return tryToCall<SearchResponse> { client.get { url(BuildConfig.BASE_URL + "search/$bookTitle") } }.books
     }
 
     override suspend fun getBookDetails(bookId: String): BookDetailDTO {
-        return wrap { bookService.getBookDetails(bookId) }
+        return tryToCall { client.get { url(BuildConfig.BASE_URL + "books/$bookId") } }
     }
 
-    private suspend fun <T> wrap(function: suspend () -> Response<T>): T {
-        val response = function()
-        return if (response.isSuccessful && response.body() != null) {
-            response.body() as T
-        } else {
-            throw Throwable("Network Error")
+    suspend fun <T> tryToCall(call: suspend () -> T): T {
+        return try {
+            call()
+        } catch (e: RedirectResponseException) {
+            throw Throwable("")
+        } catch (e: ClientRequestException) {
+            throw Throwable("")
+        } catch (e: ServerResponseException) {
+            throw Throwable("")
+        } catch (e: Exception) {
+            throw Throwable("")
         }
     }
 }

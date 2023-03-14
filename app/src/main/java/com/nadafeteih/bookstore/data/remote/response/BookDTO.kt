@@ -1,5 +1,8 @@
 package com.nadafeteih.bookstore.data.remote.response
 
+import kotlinx.serialization.Serializable
+
+@Serializable
 data class BookDTO(
     val image: String?,
     val isbn13: String?,

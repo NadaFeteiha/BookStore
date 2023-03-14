@@ -2,7 +2,9 @@ package com.nadafeteih.bookstore.data.remote.response
 
 
 import com.google.gson.annotations.SerializedName
+import kotlinx.serialization.Serializable
 
+@Serializable
 data class BookDetailDTO(
     @SerializedName("authors")
     val authors: String?,

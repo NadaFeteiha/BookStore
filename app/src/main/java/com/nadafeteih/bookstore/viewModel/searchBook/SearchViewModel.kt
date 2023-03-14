@@ -25,8 +25,7 @@ class SearchViewModel @Inject constructor(val searchBook: SearchBookUseCase) : V
     val query = _query.asStateFlow()
 
     private val _books = MutableStateFlow(emptyList<BookUIState>())
-    val books = //_books.asStateFlow()
-        query
+    val books = query
             .debounce(1000L)
             .onEach { _uiState.update { it.copy(isLoading = true) } }
             .combine(_books) { text, books ->

@@ -4,6 +4,7 @@ plugins {
     id "kotlin-kapt"
     id 'dagger.hilt.android.plugin'
     id 'com.squareup.sqldelight'
+    id 'kotlinx-serialization'
 }
 
 android {
@@ -91,6 +92,7 @@ dependencies {
     implementation "io.ktor:ktor-client-logging:$ktor_version"
     implementation "ch.qos.logback:logback-classic:1.2.3"
     implementation "org.jetbrains.kotlinx:kotlinx-serialization-json:1.4.1"
+    implementation "io.ktor:ktor-client-json:$ktor_version"
 
     //pager
     implementation "com.google.accompanist:accompanist-pager:0.28.0"
