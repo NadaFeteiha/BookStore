@@ -1,6 +1,5 @@
 package com.nadafeteih.bookstore.viewModel.searchBook
 
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.nadafeteih.bookstore.useCase.SearchBookUseCase
@@ -8,11 +7,7 @@ import com.nadafeteih.bookstore.viewModel.home.BookUIState
 import com.nadafeteih.bookstore.viewModel.home.toUIState
 import com.nadafeteih.bookstore.viewModel.savedBook.SearchUIState
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.DelicateCoroutinesApi
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.*
-import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel

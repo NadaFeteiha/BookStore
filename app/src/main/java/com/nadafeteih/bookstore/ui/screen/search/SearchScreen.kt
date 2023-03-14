@@ -7,6 +7,7 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
@@ -33,7 +34,7 @@ fun SearchScreen(
     SearchContent(
         state = state,
         query = query,
-        books = books ,
+        books = books,
         onQueryChange = viewModel::onQueryChange,
         onClickBookDetails = {
             if (!clickedBook.value) {
@@ -55,7 +56,11 @@ fun SearchContent(
     onClickBookDetails: (BookUIState) -> Unit
 ) {
 
-    LazyColumn(modifier = Modifier.fillMaxSize()) {
+    LazyColumn(
+        modifier = Modifier.fillMaxSize(),
+        contentPadding = PaddingValues(16.dp),
+        verticalArrangement = Arrangement.spacedBy(16.dp)
+    ) {
         stickyHeader {
             SearchBar(
                 query = query,
