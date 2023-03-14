@@ -27,7 +27,7 @@ class RemoteDataSourceImp @Inject constructor(private val client: HttpClient) :
         return tryToCall { client.get { url(BuildConfig.BASE_URL + "books/$bookId") } }
     }
 
-    suspend fun <T> tryToCall(call: suspend () -> T): T {
+    private suspend fun <T> tryToCall(call: suspend () -> T): T {
         return try {
             call()
         } catch (e: RedirectResponseException) {

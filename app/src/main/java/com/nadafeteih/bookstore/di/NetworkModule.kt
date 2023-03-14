@@ -39,10 +39,7 @@ object NetworkModule {
                 connectTimeoutMillis = 15000L
                 socketTimeoutMillis = 15000L
             }
-            // Apply to all requests
             defaultRequest {
-                // Parameter("api_key", "some_api_key")
-                // Content Type
                 if (method != HttpMethod.Get) contentType(ContentType.Application.Json)
                 accept(ContentType.Application.Json)
             }
