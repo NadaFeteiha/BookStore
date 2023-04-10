@@ -30,7 +30,6 @@ The application allows users to:
 ## Resources:
 - [Compose Pathway](https://developer.android.com/courses/jetpack-compose/course)
 - [Jetpack compose Samples](https://github.com/android/compose-samples)
-- [ComposeCookBook](https://github.com/Gurupreet/ComposeCookBook)
   
 ## To Do:
 - Refactor the app to follow the Google recommended architecture.
