@@ -5,7 +5,7 @@
 <p align="center">  This is a sample Android application that allows users to browse books, see their ratings and prices, save them to favorites, and search for books.</p>
 </p>
 
-<img src="https://github.com/NadaFeteiha/BookStore/blob/main/app/src/main/res/raw/book.gif" align="right" width="320"/>
+<img src="https://github.com/NadaFeteiha/BookStore/blob/main/app/src/main/res/raw/book2.gif" align="right" width="320"/>
 
 
 ## Libraries Used:
