@@ -2,16 +2,21 @@ package com.nadafeteih.bookstore.ui.screen.search.compose
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.text.KeyboardActions
+import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.input.ImeAction
+import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.style.TextDirection
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -42,24 +47,28 @@ fun SearchBar(
                     focusedIndicatorColor = Color.Transparent,
                     unfocusedIndicatorColor = Color.Transparent,
                     disabledIndicatorColor = Color.Transparent,
-                    textColor = MaterialTheme.colorScheme.primary
+                    textColor = MaterialTheme.colorScheme.primary,
+                    containerColor = MaterialTheme.colorScheme.secondary,
                 ),
                 textStyle = TextStyle(
                     fontSize = 14.sp,
                     fontWeight = FontWeight.Normal,
                     textDirection = TextDirection.Content
                 ),
-                value = query,
+                keyboardOptions = KeyboardOptions.Default.copy(
+                    imeAction = ImeAction.Search,
+                    keyboardType = KeyboardType.Text
+                ),
+                value = query.trim('\n'),
                 shape = RoundedCornerShape(100.dp),
                 singleLine = true,
-                maxLines = 1,
                 onValueChange = onQueryChange,
                 placeholder = {
                     Text(
                         text = stringResource(R.string.search),
                         style = TextStyle(
                             fontSize = 14.sp,
-                            color = MaterialTheme.colorScheme.onSecondary,
+                            color = Color.White,
                             fontWeight = FontWeight.Normal,
                             textDirection = TextDirection.Content
                         )
@@ -68,7 +77,7 @@ fun SearchBar(
                 leadingIcon = {
                     Icon(
                         imageVector = ImageVector.vectorResource(id = R.drawable.search_icon),
-                        tint = MaterialTheme.colorScheme.secondary,
+                        tint = Color.White,
                         contentDescription = null,
                     )
                 },

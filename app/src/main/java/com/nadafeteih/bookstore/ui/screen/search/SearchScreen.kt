@@ -79,8 +79,6 @@ fun SearchContent(
             )
         }
     }
-
-
 }
 
 

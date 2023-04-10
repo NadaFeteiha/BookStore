@@ -1,8 +1,6 @@
 package com.nadafeteih.bookstore.di
 
-import com.google.gson.Gson
 import com.nadafeteih.bookstore.BuildConfig
-import com.nadafeteih.bookstore.data.remote.BookService
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -15,7 +13,6 @@ import io.ktor.client.features.json.serializer.*
 import io.ktor.client.features.logging.*
 import io.ktor.client.request.*
 import io.ktor.http.*
-import okhttp3.OkHttp
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
@@ -44,12 +41,6 @@ object NetworkModule {
                 accept(ContentType.Application.Json)
             }
         }
-    }
-
-    @Singleton
-    @Provides
-    fun provideBookService(retrofit: Retrofit): BookService {
-        return retrofit.create(BookService::class.java)
     }
 
     @Singleton
