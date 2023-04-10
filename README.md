@@ -35,3 +35,20 @@ The application allows users to:
 - Refactor the app to follow the Google recommended architecture.
 - Improve the UI using Compose and Material Design guidelines.
 - Write unit and integration tests to ensure app functionality and stability.
+
+## License: 
+
+    Copyright 2023 Nada Feteiha
+
+    Licensed under the Apache License, Version 2.0 (the "License");
+    you may not use this file except in compliance with the License.
+    You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+    Unless required by applicable law or agreed to in writing, software
+    distributed under the License is distributed on an "AS IS" BASIS,
+    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+    See the License for the specific language governing permissions and
+    limitations under the License.
+
