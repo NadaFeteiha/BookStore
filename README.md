@@ -11,6 +11,7 @@
 ## Libraries Used:
 - [Jetpack Compose](https://developer.android.com/jetpack/compose?gclid=CjwKCAiAzKqdBhAnEiwAePEjktk3ROIIxTqejhHWkDEwSaQqoE6GgrNHM8iYKw8xHx5SPPDu0oJ_DxoC8LYQAvD_BwE&gclsrc=aw.ds) for UI design. 
 - [SQLDelight](https://cashapp.github.io/sqldelight/2.0.0-alpha05/) for database management.
+- [Ktor](https://ktor.io/docs/getting-started-ktor-client-multiplatform-mobile.html) for networking
 - [Hilt dependency injection](https://developer.android.com/training/dependency-injection/hilt-android) for dependency injection.
 - [MVVM](https://en.wikipedia.org/wiki/Model%E2%80%93view%E2%80%93viewmodel) architecture for clean separation of concerns and easy testing.
 - [Coroutines](https://developer.android.com/kotlin/coroutines) for asynchronous programming
@@ -32,7 +33,6 @@ The application allows users to:
 - [ComposeCookBook](https://github.com/Gurupreet/ComposeCookBook)
   
 ## To Do:
-- Integrate Ktor to fetch remote data.
 - Refactor the app to follow the Google recommended architecture.
 - Improve the UI using Compose and Material Design guidelines.
 - Write unit and integration tests to ensure app functionality and stability.
