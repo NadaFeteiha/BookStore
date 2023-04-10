@@ -1,19 +1,29 @@
 package com.nadafeteih.bookstore.ui.screen.home.compose
 
-import androidx.compose.animation.core.animateDpAsState
+import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.pager.PagerState
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material3.*
+import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.MaterialTheme.typography
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
@@ -22,41 +32,22 @@ import androidx.compose.ui.unit.dp
 import coil.compose.rememberAsyncImagePainter
 import com.nadafeteih.bookstore.R
 import com.nadafeteih.bookstore.ui.modifier.nonRippleEffect
+import com.nadafeteih.bookstore.ui.modifier.pagerTransition
 import com.nadafeteih.bookstore.viewModel.home.BookUIState
-import kotlin.math.abs
-import kotlin.math.min
 
-@OptIn(ExperimentalMaterial3Api::class)
+@OptIn(ExperimentalMaterial3Api::class, ExperimentalFoundationApi::class)
 @Composable
 fun BookItem(
     state: BookUIState,
-    isSelected: Boolean,
-    offset: Float,
+    page: Int,
+    pagerState: PagerState,
     onClickBook: (BookUIState) -> Unit,
     onClickSaved: (BookUIState) -> Unit
 ) {
-    val configuration = LocalConfiguration.current
-    val screenHeight = configuration.screenHeightDp
-
-    val animateHeight = getOffsetBasedValue(
-        selectedValue = (screenHeight / 4) * 3,
-        nonSelectedValue = (screenHeight / 2),
-        isSelected = isSelected,
-        offset = offset
-    ).dp
-    val animateWidth = getOffsetBasedValue(
-        selectedValue = 340, nonSelectedValue = 320, isSelected = isSelected, offset = offset
-    ).dp
-    val animateElevation = getOffsetBasedValue(
-        selectedValue = 12, nonSelectedValue = 2, isSelected = isSelected, offset = offset
-    ).dp
-
     Card(
-        elevation = CardDefaults.cardElevation(defaultElevation = animateDpAsState(animateElevation).value),
         modifier = Modifier
             .nonRippleEffect { onClickBook(state) }
-            .width(animateWidth)
-            .height(animateHeight)
+            .pagerTransition(page, pagerState)
             .padding(horizontal = 24.dp),
         shape = RoundedCornerShape(16.dp),
         colors = CardDefaults.cardColors(MaterialTheme.colorScheme.surface)
@@ -130,15 +121,4 @@ fun BookItem(
     }
 }
 
-private fun getOffsetBasedValue(
-    selectedValue: Int,
-    nonSelectedValue: Int,
-    isSelected: Boolean,
-    offset: Float,
-): Float {
-    val actualOffset = if (isSelected) 1 - abs(offset) else abs(offset)
-    val delta = abs(selectedValue - nonSelectedValue)
-    val offsetBasedDelta = delta * actualOffset
 
-    return min(selectedValue, nonSelectedValue) + offsetBasedDelta
-}

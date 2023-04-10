@@ -1,18 +1,17 @@
 package com.nadafeteih.bookstore.ui.screen.home
 
+import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.pager.HorizontalPager
+import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
-import com.google.accompanist.pager.ExperimentalPagerApi
-import com.google.accompanist.pager.HorizontalPager
 import com.nadafeteih.bookstore.R
 import com.nadafeteih.bookstore.ui.composable.AppBar
-import com.nadafeteih.bookstore.ui.composable.Pager
-import com.nadafeteih.bookstore.ui.composable.PagerState
 import com.nadafeteih.bookstore.ui.screen.bookDetails.navigateToBookDetails
 import com.nadafeteih.bookstore.ui.screen.home.compose.BookItem
 import com.nadafeteih.bookstore.viewModel.home.BookUIState
@@ -29,19 +28,17 @@ fun HomeScreen(
     val clickedBook = remember { mutableStateOf(false) }
 
     HomeContent(
-        state = state,
-        appTheme = appTheme,
-        onClickBook = {
+        state = state, appTheme = appTheme, onClickBook = {
             if (!clickedBook.value) {
                 navController.navigateToBookDetails(it.id)
             }
             clickedBook.value = !clickedBook.value
-        },
-        onClickSaved = viewModel::onClickSave
+        }, onClickSaved = viewModel::onClickSave
     )
 }
 
-@OptIn(ExperimentalPagerApi::class)
+
+@OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun HomeContent(
     modifier: Modifier = Modifier,
@@ -50,35 +47,28 @@ fun HomeContent(
     onClickBook: (BookUIState) -> Unit,
     onClickSaved: (BookUIState) -> Unit
 ) {
+    val pagerState = rememberPagerState()
+
     Column {
         AppBar(
-            appTheme = appTheme,
-            title = R.string.home
+            appTheme = appTheme, title = R.string.home
         )
         if (state.books.isNotEmpty()) {
-            HorizontalPager(
-                count = state.books.size,
-                contentPadding = PaddingValues(16.dp)
-            ) { page ->
-                val pagerState = remember { PagerState(maxPage = state.books.size - 1) }
-                Pager(
-                    state = pagerState,
-                    modifier = modifier,
-                ) {
-                    val book = state.books[comingPage]
-                    val isSelected = pagerState.currentPage == comingPage
-                    val filteredOffset =
-                        if (kotlin.math.abs(pagerState.currentPage - comingPage) < 2) {
-                            currentPageOffset
-                        } else 0f
 
-                    BookItem(
-                        state = book, isSelected,
-                        filteredOffset,
-                        onClickBook = onClickBook,
-                        onClickSaved = onClickSaved
-                    )
-                }
+            HorizontalPager(
+                pageCount = state.books.size,
+                contentPadding = PaddingValues(16.dp),
+                state = pagerState,
+                beyondBoundsPageCount = 2,
+            ) { page ->
+
+                BookItem(
+                    state = state.books[page],
+                    page = page,
+                    pagerState = pagerState,
+                    onClickBook = onClickBook,
+                    onClickSaved = onClickSaved
+                )
             }
         }
     }
