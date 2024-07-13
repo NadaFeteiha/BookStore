@@ -1,15 +1,14 @@
 package com.nadafeteih.bookstore.ui.screen.home
 
-import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.pager.HorizontalPager
-import androidx.compose.foundation.pager.rememberPagerState
-import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
+import com.google.accompanist.pager.ExperimentalPagerApi
+import com.google.accompanist.pager.HorizontalPager
+import com.google.accompanist.pager.rememberPagerState
 import com.nadafeteih.bookstore.R
 import com.nadafeteih.bookstore.ui.composable.AppBar
 import com.nadafeteih.bookstore.ui.screen.bookDetails.navigateToBookDetails
@@ -38,7 +37,7 @@ fun HomeScreen(
 }
 
 
-@OptIn(ExperimentalFoundationApi::class)
+@OptIn(ExperimentalPagerApi::class)
 @Composable
 fun HomeContent(
     modifier: Modifier = Modifier,
@@ -49,17 +48,17 @@ fun HomeContent(
 ) {
     val pagerState = rememberPagerState()
 
-    Column {
+    Column(modifier = modifier) {
         AppBar(
             appTheme = appTheme, title = R.string.home
         )
         if (state.books.isNotEmpty()) {
 
             HorizontalPager(
-                pageCount = state.books.size,
+                count = state.books.size,
                 contentPadding = PaddingValues(16.dp),
                 state = pagerState,
-                beyondBoundsPageCount = 2,
+//                beyondBoundsPageCount = 2,
             ) { page ->
 
                 BookItem(
