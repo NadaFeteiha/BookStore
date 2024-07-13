@@ -5,18 +5,27 @@ import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
-import io.ktor.client.*
-import io.ktor.client.engine.android.*
-import io.ktor.client.features.*
-import io.ktor.client.features.json.*
-import io.ktor.client.features.json.serializer.*
-import io.ktor.client.features.logging.*
-import io.ktor.client.request.*
-import io.ktor.http.*
+import io.ktor.client.HttpClient
+import io.ktor.client.engine.cio.CIO
+import io.ktor.client.plugins.HttpTimeout
+import io.ktor.client.plugins.defaultRequest
+import io.ktor.client.plugins.logging.LogLevel
+import io.ktor.client.plugins.logging.Logging
+import io.ktor.client.request.accept
+import io.ktor.http.ContentType
+import io.ktor.http.contentType
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import javax.inject.Singleton
+import io.ktor.client.plugins.contentnegotiation.*
+import io.ktor.client.request.header
+import io.ktor.http.HttpHeaders
+import io.ktor.http.HttpMethod
+import io.ktor.serialization.kotlinx.json.json
+import io.ktor.util.AttributeKey
+import kotlinx.serialization.json.Json
+
 
 @Module
 @InstallIn(SingletonComponent::class)
@@ -24,22 +33,38 @@ object NetworkModule {
 
     @Provides
     fun provideHttpClient(): HttpClient {
-        return HttpClient(Android) {
+        return HttpClient(CIO) {
+            expectSuccess = true
+
             install(Logging) {
                 level = LogLevel.ALL
             }
-            install(JsonFeature) {
-                serializer = KotlinxSerializer()
+
+            install(ContentNegotiation) {
+                json(
+                    Json {
+                        isLenient = true
+                        ignoreUnknownKeys = true
+                    }
+                )
             }
+
             install(HttpTimeout) {
                 requestTimeoutMillis = 15000L
                 connectTimeoutMillis = 15000L
                 socketTimeoutMillis = 15000L
             }
             defaultRequest {
-                if (method != HttpMethod.Get) contentType(ContentType.Application.Json)
+                contentType(ContentType.Application.Json)
                 accept(ContentType.Application.Json)
             }
+
+//            defaultRequest {
+////                url("http://api.weatherapi.com/v1/")
+//                header(HttpHeaders.ContentType, "application/json")
+//                url.parameters.append("key", BuildConfig.BASE_URL)
+//
+//            }
         }
     }
 
