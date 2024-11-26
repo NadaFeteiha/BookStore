@@ -22,6 +22,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.nadafeteih.bookstore.R
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun SearchBar(
     query: String,
@@ -47,7 +48,6 @@ fun SearchBar(
                     focusedIndicatorColor = Color.Transparent,
                     unfocusedIndicatorColor = Color.Transparent,
                     disabledIndicatorColor = Color.Transparent,
-                    textColor = MaterialTheme.colorScheme.primary,
                     containerColor = MaterialTheme.colorScheme.secondary,
                 ),
                 textStyle = TextStyle(
